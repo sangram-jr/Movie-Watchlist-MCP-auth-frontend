@@ -1,11 +1,11 @@
 
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, Suspense} from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/client";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -159,5 +159,21 @@ export default function LoginPage() {
         </button>
       </div>
     </main>
+  );
+}
+
+
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <LoginForm />
+    </Suspense>
   );
 }
